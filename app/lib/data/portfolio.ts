@@ -50,16 +50,15 @@ export const timelinePoints: TimelinePoint[] = [
 ];
 
 export const techSkills: TechSkill[] = [
-  { id: "angular", name: "Angular", description: "Enterprise UI with structured architecture.", category: "Framework", accent: "#DD0031", icon: "SiAngular" },
-  { id: "react", name: "React", description: "Reactive interfaces for modern products.", category: "Library", accent: "#61DAFB", icon: "SiReact" },
-  { id: "nextjs", name: "Next.js", description: "Hybrid rendering and page-level performance.", category: "Framework", accent: "#ffffff", icon: "SiNextdotjs" },
-  { id: "typescript", name: "TypeScript", description: "Typed code with predictable developer experience.", category: "Language", accent: "#3178C6", icon: "SiTypescript" },
-  { id: "javascript", name: "JavaScript", description: "Flexible application logic and integrations.", category: "Language", accent: "#F7DF1E", icon: "SiJavascript" },
-  { id: "tailwind", name: "Tailwind", description: "Utility-first styling with clean cadence.", category: "Styling", accent: "#38BDF8", icon: "SiTailwindcss" },
-  { id: "docker", name: "Docker", description: "Containers for consistent delivery.", category: "DevOps", accent: "#2496ED", icon: "SiDocker" },
-  { id: "git", name: "Git", description: "Source control and collaboration workflows.", category: "Tooling", accent: "#F05032", icon: "SiGit" },
-  { id: "node", name: "Node.js", description: "API composition and backend tooling.", category: "Platform", accent: "#539E43", icon: "SiNodedotjs" },
-  
+  { id: "angular", name: "Angular", description: "Enterprise UI with structured architecture.", category: "Framework", accent: "#DD0031", icon: "logos:angular", level: 9 },
+  { id: "react", name: "React", description: "Reactive interfaces for modern products.", category: "Library", accent: "#61DAFB", icon: "logos:react", level: 10 },
+  { id: "nextjs", name: "Next.js", description: "Hybrid rendering and page-level performance.", category: "Framework", accent: "#ffffff", icon: "logos:nextjs", level: 10 },
+  { id: "typescript", name: "TypeScript", description: "Typed code with predictable developer experience.", category: "Language", accent: "#3178C6", icon: "logos:typescript-icon", level: 10 },
+  { id: "javascript", name: "JavaScript", description: "Flexible application logic and integrations.", category: "Language", accent: "#F7DF1E", icon: "logos:javascript", level: 9 },
+  { id: "tailwind", name: "Tailwind", description: "Utility-first styling with clean cadence.", category: "Styling", accent: "#38BDF8", icon: "logos:tailwindcss-icon", level: 10 },
+  { id: "docker", name: "Docker", description: "Containers for consistent delivery.", category: "DevOps", accent: "#2496ED", icon: "logos:docker-icon", level: 8 },
+  { id: "git", name: "Git", description: "Source control and collaboration workflows.", category: "Tooling", accent: "#F05032", icon: "logos:git-icon", level: 10 },
+  { id: "node", name: "Node.js", description: "API composition and backend tooling.", category: "Platform", accent: "#539E43", icon: "logos:nodejs-icon", level: 9 },
 ];
 
 export const projects: Project[] = [
@@ -73,7 +72,7 @@ export const projects: Project[] = [
     status: "In progress",
     demoUrl: "#",
     githubUrl: "#",
-    image: "/projects/scale-dashboard.jpg",
+    image: "/projects/scale-dashboard.svg",
   },
   {
     id: "platform-ui",
@@ -85,7 +84,7 @@ export const projects: Project[] = [
     status: "Completed",
     demoUrl: "#",
     githubUrl: "#",
-    image: "/projects/platform-ui.jpg",
+    image: "/projects/platform-ui.svg",
   },
   {
     id: "growth-portal",
@@ -97,7 +96,43 @@ export const projects: Project[] = [
     status: "Completed",
     demoUrl: "#",
     githubUrl: "#",
-    image: "/projects/growth-portal.jpg",
+    image: "/projects/growth-portal.svg",
+  },
+  {
+    id: "studio-case",
+    name: "Studio Case",
+    description: "A curated editorial product experience designed for storytelling and visual clarity.",
+    category: "Brand",
+    stack: ["Next.js", "Tailwind", "Framer Motion"],
+    year: 2025,
+    status: "Prototype",
+    demoUrl: "#",
+    githubUrl: "#",
+    image: "/projects/scale-dashboard.svg",
+  },
+  {
+    id: "launch-platform",
+    name: "Launch Platform",
+    description: "A clean, data-driven interface for pricing, user journeys and launch operations.",
+    category: "Product",
+    stack: ["React", "TypeScript", "Stripe"],
+    year: 2024,
+    status: "Completed",
+    demoUrl: "#",
+    githubUrl: "#",
+    image: "/projects/platform-ui.svg",
+  },
+  {
+    id: "growth-hub",
+    name: "Growth Hub",
+    description: "A growth intelligence hub focused on performance metrics, funnels and product experimentation.",
+    category: "Web App",
+    stack: ["Node.js", "Docker", "Next.js"],
+    year: 2025,
+    status: "In progress",
+    demoUrl: "#",
+    githubUrl: "#",
+    image: "/projects/growth-portal.svg",
   },
 ];
 

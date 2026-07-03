@@ -1,115 +1,56 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import type { Translations } from "@/app/lib/i18n";
 import { techSkills } from "@/app/lib/data/portfolio";
-import {
-  SiAngular,
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiJavascript,
-  SiTailwindcss,
-  SiDocker,
-  SiGit,
-  SiNodedotjs,
-} from "react-icons/si";
 
-const iconMap = {
-  SiAngular,
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiJavascript,
-  SiTailwindcss,
-  SiDocker,
-  SiGit,
-  SiNodedotjs,
-  
-} as const;
+function SkillCloudItem({ skill, index }: { skill: typeof techSkills[number]; index: number }) {
+  const level = skill.level ?? 8;
+  const offset = index % 2 === 0 ? "sm:-translate-y-3" : "sm:translate-y-4";
 
-function TechIcon({ skill }: { skill: typeof techSkills[number] }) {
-  const Icon = (iconMap as Record<string, any>)[skill.icon];
   return (
-    <div className="flex h-12 w-12 items-center justify-center rounded-lg" style={{ backgroundColor: `${skill.accent}20` }}>
-      {Icon ? <Icon size={22} className="text-white" /> : <span className="text-sm font-bold text-white">{skill.name[0]}</span>}
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.55, delay: index * 0.04 }}
+      whileHover={{ y: -4, scale: 1.02, boxShadow: "0 18px 50px -20px rgba(96,165,250,0.24)" }}
+      className={`group relative flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm transition hover:bg-white/10 ${offset}`}
+    >
+      <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10" style={{ backgroundColor: `${skill.accent}18` }}>
+        <Icon icon={skill.icon} className="h-5 w-5 text-slate-100" />
+      </span>
+      <div>
+        <p className="text-sm font-medium text-slate-100">{skill.name}</p>
+        <p className="text-[11px] uppercase tracking-[0.25em] text-slate-400">{skill.category}</p>
+      </div>
+      <div className="ml-auto flex gap-1.5">
+        {Array.from({ length: 6 }, (_, dotIndex) => (
+          <span key={dotIndex} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: dotIndex < Math.round(level / 2) ? skill.accent : "rgba(148,163,184,0.18)" }} />
+        ))}
+      </div>
+    </motion.div>
   );
 }
 
 export function StackSection({ text }: { text: Translations["stack"] }) {
-  const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [autoplayRef.current]);
-  const [isAutoplay, setIsAutoplay] = useState(true);
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
-  const onMouseEnter = () => {
-    setIsAutoplay(false);
-    autoplayRef.current?.stop?.();
-  };
-
-  const onMouseLeave = () => {
-    setIsAutoplay(true);
-    autoplayRef.current?.play?.();
-  };
-
-  const slides = useMemo(() => techSkills, []);
-
   return (
-    <section className="relative overflow-hidden bg-slate-900/60 px-6 py-20 sm:px-12 lg:px-20">
+    <section id="skills" className="relative overflow-hidden px-8 py-32 sm:px-12 lg:px-20">
       <div className="mx-auto max-w-screen-2xl">
-        {/* decorative background for stack section */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: "url('/projects/svg/bg01.svg')" }}
-          />
-        </div>
-        <div className="mb-8 max-w-2xl space-y-3">
-          <p className="text-sm uppercase tracking-[0.35em] text-blue-300/90">{text.label}</p>
-          <h2 className="text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl">{text.title}</h2>
+        <div className="mb-16 max-w-3xl space-y-4">
+          <p className="text-sm uppercase tracking-[0.35em] text-blue-300/80">{text.label}</p>
+          <h2 className="text-4xl font-semibold tracking-[-0.04em] text-slate-50 sm:text-5xl lg:text-6xl">{text.title}</h2>
+          <p className="max-w-2xl text-lg leading-8 text-slate-300/80">A set of tools and platforms that shape how I design and build interface systems.</p>
         </div>
 
-          <div className="relative">
-          <div
-            ref={emblaRef}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            className="embla overflow-hidden"
-            aria-roledescription="carousel"
-          >
-            <div className="embla__container flex gap-4">
-              {slides.map((skill, idx) => (
-                <div className="embla__slide w-72 flex-shrink-0" key={skill.id} role="group" aria-roledescription="slide" aria-label={`${idx + 1} of ${slides.length}`}>
-                  <motion.article
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45, delay: idx * 0.03 }}
-                    className="rounded-2xl border border-white/8 bg-slate-950/80 p-5 shadow-lg"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-3xl">
-                        <TechIcon skill={skill} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-slate-50">{skill.name}</h3>
-                        <p className="text-sm text-slate-400">{skill.category}</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm leading-7 text-slate-300">{skill.description}</p>
-                  </motion.article>
-                </div>
-              ))}
-            </div>
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-950/40 p-8 sm:p-10 lg:p-12">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.08),transparent_28%)]" />
+          <div className="relative flex flex-wrap justify-center gap-4">
+            {techSkills.map((skill, index) => (
+              <SkillCloudItem key={skill.id} index={index} skill={skill} />
+            ))}
           </div>
-
-          <button aria-label="Previous" onClick={scrollPrev} className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-slate-800/50 p-2 text-slate-100/90 hover:bg-slate-800/70">‹</button>
-          <button aria-label="Next" onClick={scrollNext} className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-slate-800/50 p-2 text-slate-100/90 hover:bg-slate-800/70">›</button>
         </div>
       </div>
     </section>

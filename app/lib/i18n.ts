@@ -17,6 +17,7 @@ export const translations = {
       description: "Especialista em arquitetura frontend moderna, sistemas de UI polidos e experiências performáticas para times reais.",
       primary: "Conectar",
       secondary: "Ver projetos",
+      insights: "Engenheiro front-end focado em interfaces lúcidas, sistemas bem pensados e desempenho calmo."
     },
     about: {
       label: "Sobre",
@@ -77,6 +78,7 @@ export const translations = {
       description: "Specialist in modern frontend architecture, polished UI systems and performant experiences for real teams.",
       primary: "Connect",
       secondary: "View projects",
+      insights: "Front-end engineer focused on lucid interfaces, thoughtful systems and calm performance."
     },
     about: {
       label: "About",

@@ -5,14 +5,14 @@
   --font-sans: 'Fira Sans', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   --font-display: Inter, 'Fira Sans', system-ui, -apple-system, 'Segoe UI', Roboto;
   color-scheme: dark;
-  background: #09090B;
-  color: #e2e8f0;
+  background: #050816;
+  color: #e8ebf2;
   font-family: var(--font-sans);
 }
 
 @theme inline {
-  --color-background: #09090B;
-  --color-foreground: #e2e8f0;
+  --color-background: #050816;
+  --color-foreground: #e8ebf2;
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
 }
@@ -23,14 +23,44 @@ html {
 
 body {
   min-height: 100%;
-  background: radial-gradient(circle at top left, rgba(59,130,246,0.08), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(59,130,246,0.05), transparent 24%),
-    #070617;
-  color: #e2e8f0;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.12), transparent 22%),
+    radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.09), transparent 28%),
+    linear-gradient(135deg, #050816 0%, #07101f 45%, #0d1326 100%);
+  color: #e8ebf2;
   font-family: var(--font-sans);
+  position: relative;
+  isolation: isolate;
 }
 
-/* Headings use the display font for more contrast */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 88px 88px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent 92%);
+  opacity: 0.22;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.22), transparent 34%),
+    radial-gradient(circle at 80% 30%, rgba(250, 204, 21, 0.15), transparent 28%),
+    radial-gradient(circle at 60% 80%, rgba(125, 211, 252, 0.14), transparent 32%);
+  filter: blur(90px);
+  z-index: -1;
+  opacity: 0.34;
+}
+
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
 }
@@ -54,6 +84,6 @@ canvas {
 }
 
 ::selection {
-  background: rgba(59,130,246,0.25);
-  color: #e2e8f0;
+  background: rgba(250, 204, 21, 0.24);
+  color: #f8fafc;
 }

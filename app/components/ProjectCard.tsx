@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/app/lib/types/portfolio";
 
 interface ProjectCardProps {
@@ -12,62 +13,29 @@ interface ProjectCardProps {
   };
 }
 
-export function ProjectCard({ project, actions }: ProjectCardProps) {
+export function ProjectCard({ project, actions, reverse = false }: ProjectCardProps & { reverse?: boolean }) {
   return (
-    <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="group overflow-hidden rounded-[32px] border border-white/10 bg-slate-950/70 shadow-[0_20px_80px_-70px_rgba(0,0,0,0.8)] backdrop-blur-xl"
-    >
-      <div className="relative h-72 overflow-hidden bg-slate-900">
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          className="object-cover transition duration-500 group-hover:scale-105"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          priority={false}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
-        <div className="absolute left-6 bottom-6 flex flex-wrap gap-2">
-          <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs uppercase tracking-[0.33em] text-blue-200/85">
-            {project.category}
-          </span>
-          <span className="rounded-full bg-slate-900/55 px-3 py-1 text-xs uppercase tracking-[0.33em] text-slate-300">
-            {project.year}
-          </span>
-        </div>
+    <motion.article initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.7 }} className={`grid gap-8 py-12 lg:grid-cols-2 lg:items-center ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
+      <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/40">
+        <Image src={project.image} alt={project.name} width={1200} height={800} className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]" />
       </div>
-
-      <div className="space-y-5 p-6">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <h3 className="text-2xl font-semibold tracking-tight text-slate-50">{project.name}</h3>
-            <p className="mt-2 text-sm text-slate-400">{project.status}</p>
-          </div>
-          <span className="rounded-full border border-slate-700/70 px-3 py-1 text-xs uppercase tracking-[0.35em] text-slate-300">
-            {project.stack[0]}
-          </span>
+      <div className="space-y-6">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.35em] text-blue-300/80">{project.category}</p>
+          <h3 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-slate-50 sm:text-4xl">{project.name}</h3>
         </div>
-
-        <p className="text-sm leading-7 text-slate-300">{project.description}</p>
-
-        <div className="flex flex-wrap gap-2 text-xs text-slate-400">
+        <p className="max-w-xl text-lg leading-8 text-slate-300/80">{project.description}</p>
+        <div className="flex flex-wrap gap-2 text-sm text-slate-400">
           {project.stack.map((item) => (
-            <span
-              key={item}
-              className="rounded-full border border-slate-700/60 bg-white/5 px-3 py-1"
-            >
-              {item}
-            </span>
+            <span key={item} className="rounded-full border border-white/10 px-3 py-1">{item}</span>
           ))}
         </div>
-
-        <div className="flex flex-wrap gap-3 pt-3 text-sm font-medium text-blue-300">
-          <a href={project.demoUrl} className="transition hover:text-blue-100">
+        <div className="flex flex-wrap gap-5 pt-2 text-sm font-medium text-slate-200">
+          <a href={project.demoUrl} className="inline-flex items-center gap-2 transition hover:text-blue-300">
             {actions.demo}
+            <ArrowUpRight className="h-4 w-4" />
           </a>
-          <a href={project.githubUrl} className="transition hover:text-blue-100">
+          <a href={project.githubUrl} className="transition hover:text-blue-300">
             {actions.github}
           </a>
         </div>

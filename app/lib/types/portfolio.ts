@@ -21,6 +21,7 @@ export interface TechSkill {
   category: string;
   accent: string;
   icon: string;
+  level?: number;
 }
 
 export interface Project {
